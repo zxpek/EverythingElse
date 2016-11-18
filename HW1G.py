@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Nov 17 15:03:17 2016
-
-@author: zx_pe
 """
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -17,8 +15,21 @@ print(adj.todense())
 inc = nx.incidence_matrix(G,nodelist=['a','b','c','d','e'],oriented=True)
 print(inc.todense())
 
-spLength = pd.DataFrame.from_dict(nx.shortest_path_length(G))
+#spLength = pd.DataFrame.from_dict(nx.shortest_path_length(G))
+#print(spLength)
+
+#G.edges(data='weight')
+#edgeWeight=dict([((u,v,),int(d['weight'])) for u,v,d in G.edges(data=True)])
+
+spLength = pd.DataFrame.from_dict(nx.floyd_warshall(G))
 print(spLength)
+
+#Finding diameter
+diam = 0
+for col in spLength:
+    for i in spLength[col]:
+        if i != np.inf and i >= diam:
+            diam = i
 
 
 #Generate values for histogram
@@ -55,4 +66,4 @@ nx.draw_networkx_nodes(G2,pos)
 nx.draw_networkx_edges(G2,pos)
 nx.draw_networkx_labels(G2,pos)
     
-    
+plt.savefig("graph_plot.png")    
