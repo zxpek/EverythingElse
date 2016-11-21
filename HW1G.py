@@ -10,12 +10,14 @@ from networkx.drawing.nx_agraph import write_dot
 import pydotplus
 import pygraphviz
 
-G = nx.read_weighted_edgelist("HW1_problem1.txt", nodetype = str, create_using=nx.DiGraph())
+G = nx.read_edgelist("HW1_problem1.txt", nodetype = str, create_using=nx.DiGraph(), data = (('weight',int),))
 
 adj = nx.adjacency_matrix(G, nodelist=['a','b','c','d','e'])
 print(adj.todense())
 
-inc = nx.incidence_matrix(G,nodelist=['a','b','c','d','e'],oriented=True)
+inc = nx.incidence_matrix(G, nodelist=['a','b','c','d','e'], 
+                          edgelist = [('a', 'b'), ('b', 'c'), ('c', 'd'), ('b', 'e'), ('d', 'b'), ('d', 'e'), ('a', 'd')],
+                          oriented=True)
 print(inc.todense())
 
 
@@ -24,6 +26,9 @@ print(inc.todense())
 
 #G.edges(data='weight')
 #edgeWeight=dict([((u,v,),int(d['weight'])) for u,v,d in G.edges(data=True)])
+
+distance_matrix = nx.floyd_warshall_numpy(G, nodelist=['a','b','c','d','e'], weight='weight')
+print(distance_matrix)
 
 spLength = pd.DataFrame.from_dict(nx.floyd_warshall(G))
 print(spLength)
