@@ -13,16 +13,15 @@ G = nx.read_weighted_edgelist("HW1_problem1.txt", nodetype = str, create_using=n
 adj = nx.adjacency_matrix(G, nodelist=['a','b','c','d','e'])
 print(adj.todense())
 
-inc = nx.incidence_matrix(G,nodelist=['a','b','c','d','e'],oriented=True)
+inc = nx.incidence_matrix(G, nodelist=['a','b','c','d','e'], oriented=True)
 print(inc.todense())
 
 distance_matrix = nx.floyd_warshall_numpy(G, nodelist=['a','b','c','d','e'], weight='weight')
 print(distance_matrix)
 
 #Finding diameter
-def findDiam(G):
+def findDiam(dm):
     diam = 0
-    dm = nx.floyd_warshall_numpy(G, nodelist=['a','b','c','d','e'], weight='weight')
     for i in range(dm.shape[0]):
         for j in range(dm.shape[1]):
             if dm[i,j] != np.inf and dm[i,j] >= diam:
@@ -30,7 +29,7 @@ def findDiam(G):
     
     return diam 
 
-d = findDiam(G)    
+d = findDiam(distance_matrix)    
 print('Diameter of Graph is ' + str(d))
     
 #write_dot(G,'hello.dot')
