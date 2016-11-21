@@ -6,41 +6,27 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
-from networkx.drawing.nx_agraph import write_dot
-import pydotplus
-import pygraphviz
 
-G = nx.read_edgelist("HW1_problem1.txt", nodetype = str, create_using=nx.DiGraph(), data = (('weight',int),))
+
+G = nx.read_weighted_edgelist("HW1_problem1.txt", nodetype = str, create_using=nx.DiGraph())
 
 adj = nx.adjacency_matrix(G, nodelist=['a','b','c','d','e'])
 print(adj.todense())
 
-inc = nx.incidence_matrix(G, nodelist=['a','b','c','d','e'], 
-                          edgelist = [('a', 'b'), ('b', 'c'), ('c', 'd'), ('b', 'e'), ('d', 'b'), ('d', 'e'), ('a', 'd')],
-                          oriented=True)
+inc = nx.incidence_matrix(G,nodelist=['a','b','c','d','e'],oriented=True)
 print(inc.todense())
-
-
-#spLength = pd.DataFrame.from_dict(nx.shortest_path_length(G))
-#print(spLength)
-
-#G.edges(data='weight')
-#edgeWeight=dict([((u,v,),int(d['weight'])) for u,v,d in G.edges(data=True)])
 
 distance_matrix = nx.floyd_warshall_numpy(G, nodelist=['a','b','c','d','e'], weight='weight')
 print(distance_matrix)
 
-spLength = pd.DataFrame.from_dict(nx.floyd_warshall(G))
-print(spLength)
-write_dot(G,'hello.dot')
 #Finding diameter
 def findDiam(G):
     diam = 0
-    spLength = pd.DataFrame.from_dict(nx.floyd_warshall(G))
-    for col in spLength:
-        for i in spLength[col]:
-            if i != np.inf and i >= diam:
-                diam = i
+    dm = nx.floyd_warshall_numpy(G, nodelist=['a','b','c','d','e'], weight='weight')
+    for i in range(dm.shape[0]):
+        for j in range(dm.shape[1]):
+            if dm[i,j] != np.inf and dm[i,j] >= diam:
+                diam = dm[i,j]
     
     return diam 
 
