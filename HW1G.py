@@ -58,7 +58,7 @@ G2 = np.matrix(G2)
 G2 = nx.from_numpy_matrix(G2)
 
 
-pos = nx.shell_layout(G2)
+pos = nx.spring_layout(G2)
 plt.figure(figsize=(15,10))
 
 nx.draw(G2,pos)
