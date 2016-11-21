@@ -53,11 +53,11 @@ We read the data into using the \texttt{read\_edgelist()} function and get the f
 \begin{table}[ht]
 \begin{center}
 \begin{tabular}{c|cccccccc}
-a & 0 	& 0 	& 0 	& -1 	& 0\\
-b &-1 	& -1	& 1 	& 1	&0\\
-c &0 	& 1 	& 0 	& 0	&-1\\
-d & 0 	& 0 	& -1 	& 0	& 1\\
-e & 1 	& 0 	& 0 	& 0	& 0
+a & -1 & -1 	& 0 	& 0 	& 0	& 0	&0\\
+b &1 	& 0	& 1 	& 0	& -1	& -1	& 0\\
+c &0 	& 0 	& 0 	& 0	&0	&1	&-1\\
+d & 0 	& 1 	& -1 	& -1	& 0	&0	&1\\
+e & 0 	& 0 	& 0 	& 1	& 1	&0	&0
 \end{tabular}
 \end{center}
 \end{table}
@@ -67,11 +67,11 @@ e & 1 	& 0 	& 0 	& 0	& 0
 \begin{table}[ht]
 \begin{center}
 \begin{tabular}{c|cccccccc}
-a & 0 	& $\inf$	& $\inf$	& $\inf$ & $\inf$\\
-b &5 	& 0	& 6 	& 8	&$\inf$\\
-c &15 	& 10 	& 0 	& 18	&$\inf$\\
-d & 3 	& 8 	& -2 	& 0	&$ \inf$\\
-e & 6 	& 7 	& 21	& 3	&$ \inf$
+a & 0 		& 5	& 15	& 3 	& 6\\
+b &$\inf$ 	& 0	& 10 	& 8	& 7\\
+c &$\inf$ 	& 6 	& 0 	& -2	& 1\\
+d &$\inf$ 	& 8 	& 18 	& 0	& 3\\
+e &$\inf$ 	&$\inf$& $\inf$& $\inf$	& 0
 \end{tabular}
 \end{center}
 \end{table}
