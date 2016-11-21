@@ -42,10 +42,11 @@ for key in deg.keys():
   values.append(deg[key])
   
 #Plot histogram
-plt.hist(values)
+degree_values = sorted(nx.degree(G).values())
+plt.hist(degree_values)
 plt.title("Degree Distribution plot")
-plt.ylabel("Degree")
-plt.xlabel("Frequency")
+plt.ylabel("Frequency")
+plt.xlabel("Degree")
 plt.savefig("degree_histogram.png")
 plt.close()
 #Check weak and strong connectivity
