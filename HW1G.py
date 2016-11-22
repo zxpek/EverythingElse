@@ -34,20 +34,54 @@ def findDiam(dm):
 
 d = findDiam(distance_matrix)    
 print('The diameter of the graph is ' + str(d))
-  
-#Plot the degree distribution of the graph
+
+#Plot the undirected degree distribution of the graph
 degree_values = sorted(nx.degree(G).values())
-plt.hist(degree_values)
-plt.title("Degree Distribution plot")
+his = np.histogram(degree_values, bins = range(6))
+fig, ax = plt.subplots()
+offset = .4
+plt.bar(his[1][1:], his[0])
+ax.set_xticks(his[1][1:] + offset)
+ax.set_xticklabels(('0','1','2','3','4'))
+plt.title("Total Degree Distribution Plot")
 plt.ylabel("Frequency")
 plt.xlabel("Degree")
 plt.savefig("degree_histogram.png")
 plt.close()
 
+#Plot the inward degree distribution of the graph
+in_degrees = G.in_degree()
+in_values = sorted(in_degrees.values())
+hisin = np.histogram(in_values, bins = range(6))
+fig, ax = plt.subplots()
+offset = .4
+plt.bar(hisin[1][1:], hisin[0])
+ax.set_xticks(hisin[1][1:] + offset)
+ax.set_xticklabels(('0','1','2','3','4'))
+plt.title("Inward Degree Distribution Plot")
+plt.ylabel("Frequency")
+plt.xlabel("Degree")
+plt.savefig("in_degree_histogram.png")
+plt.close()
+
+#Plot the outward degree distribution of the graph
+out_degrees = G.out_degree()
+out_values = sorted(out_degrees.values())
+hisout = np.histogram(out_values, bins = range(6))
+fig, ax = plt.subplots()
+offset = .4
+plt.bar(hisout[1][1:], hisout[0])
+ax.set_xticks(hisout[1][1:] + offset)
+ax.set_xticklabels(('0','1','2','3','4'))
+plt.title("Outward Degree Distribution Plot")
+plt.ylabel("Frequency")
+plt.xlabel("Degree")
+plt.savefig("out_degree_histogram.png")
+plt.close()
+
 #Check weak and strong connectivity
 print(nx.is_strongly_connected(G))
 print(nx.is_weakly_connected(G))
-
 
 #Draw the graph
 #We removed the top half of the matrix in the txt file to keep 34 rows
